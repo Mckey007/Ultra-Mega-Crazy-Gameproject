@@ -6,6 +6,8 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float fireRate = 1f;
+    private bool canFire = true;
     private Vector2 lookDirection;
     private float lookAngle;
     // Start is called before the first frame update
@@ -21,14 +23,17 @@ public class Weapon : MonoBehaviour
         lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, lookAngle);
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && canFire)
         {
-            FireBullet();
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            canFire = false;
+            StartCoroutine(ShootDelay());
         }
     }
 
-    private void FireBullet()
+    IEnumerator ShootDelay()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        yield return new WaitForSeconds(fireRate);
+        canFire = true;
     }
 }
