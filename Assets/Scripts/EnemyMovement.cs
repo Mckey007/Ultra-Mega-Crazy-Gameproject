@@ -30,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
         rb.velocity = new Vector2(direction * speed, rb.velocity.y);
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision) {
          switch(collision.gameObject.tag) {
             case "Player":
