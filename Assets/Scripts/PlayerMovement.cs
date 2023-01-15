@@ -10,10 +10,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float speed = 10f;
     [SerializeField]
-    private float gravity = -9.8f;
-    [SerializeField]
     private float jumpHeight = 10f;
 
+    private float boost = 1f;
     private bool isGrounded = false;
     private bool isFreezed = false;
 
@@ -33,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Reset handle
-        if(transform.position.y < -10f) {
+        if(transform.position.y < -50f) {
             reset();
         }
 
@@ -49,8 +48,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void move() {
-        float horizontal = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        //float horizontal = Input.GetAxis("Horizontal");
+        float horizontal = 1;
+        rb.velocity = new Vector2(horizontal * speed * boost, rb.velocity.y);
     }
 
     void jump() {
@@ -71,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         switch(collision.gameObject.tag) {
             case "Ground":
                 isGrounded = true;
+                boost = 1f;
                 break;
             case "Enemy":
                 onHit();
@@ -84,31 +85,10 @@ public class PlayerMovement : MonoBehaviour
         switch(other.gameObject.tag) {
             case "Ground":
                 isGrounded = false;
+                boost = 0.7f;
                 break;
             default:
                 break;
         }
     }
 }
-
-        ////DEPRECADED
-        //float vertical = Input.GetAxis("Vertical"); // W = 1, S = -1
-        //float horizontal = Input.GetAxis("Horizontal"); // A = -1 , D = 1
-        //Vector3 moveDirection = new(horizontal, 0, 0);
-        //// groundedCheck
-
-        //if(true) { // grounded?
-        //    if(vertical > 0) // jump
-        //    {
-        //        //moveDirection.y = jumpHeight;
-        //        // grounded = false;
-        //    }
-        //}
-        //else
-        //{
-        //    moveDirection.y = gravity;
-        //}
-        
-
-        //// Todo FixedUpdate?
-        //rb.MovePosition(transform.position + moveDirection * speed * Time.deltaTime);
