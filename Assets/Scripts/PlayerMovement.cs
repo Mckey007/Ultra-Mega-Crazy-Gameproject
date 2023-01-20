@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity= new Vector2(rb.velocity.x, jumpHeight);
     }
 
-    void onHit() {
+    public void onHit() {
         Time.timeScale = 0;
         this.isFreezed = true;
     }
