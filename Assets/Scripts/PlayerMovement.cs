@@ -16,10 +16,19 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private bool isFreezed = false;
 
+    // animation
+    Animator animator;
+    private string currentState;
+
+    const string PLAYER_IDLE = "Player_Idle";
+    const string PLAYER_WALK = "Player_Walk";
+    const string PLAYER_JUMP = "Player_Jump";
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -45,6 +54,15 @@ public class PlayerMovement : MonoBehaviour
             jump();
         }
 
+        if(isGrounded)
+        {
+            ChangeAnimationState(PLAYER_WALK);
+        }
+        else
+        {
+            ChangeAnimationState(PLAYER_JUMP);
+        }
+
     }
 
     void move() {
@@ -65,6 +83,15 @@ public class PlayerMovement : MonoBehaviour
     void reset() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
+    }
+
+    private void ChangeAnimationState(string newState)
+    {
+        // dont allow the same animation to interrupt itself
+        if (currentState == newState) return;
+
+        animator.Play(newState);
+        currentState = newState;
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {   

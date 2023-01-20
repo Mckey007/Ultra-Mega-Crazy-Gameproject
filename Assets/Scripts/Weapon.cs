@@ -10,6 +10,10 @@ public class Weapon : MonoBehaviour
     private bool canFire = true;
     private Vector2 lookDirection;
     private float lookAngle;
+
+    public float LookAngle { get => lookAngle; }
+    public Transform FirePoint { get => firePoint; }
+
     // Start is called before the first frame update
     void Start()
     {
