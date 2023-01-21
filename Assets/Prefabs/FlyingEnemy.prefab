@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   deathEffect: {fileID: 0}
+  dieSFX: {fileID: 8300000, guid: d57123bc7c7ee4849b0068002a39e5d2, type: 3}
 --- !u!114 &3983381749367165990
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -184,6 +184,7 @@ MonoBehaviour:
   rb: {fileID: 1426615808937975310}
   speed: 10
   jumpHeight: 8
+  jumpSFX: {fileID: 8300000, guid: 088bdfaae35df5645b542f6a86d391b2, type: 3}
 --- !u!212 &1183485424
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -507,7 +508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1426615810009274584}
   bulletPrefab: {fileID: 4834280859496733687, guid: 4acf35055eef07e4b9730785f86f1be9, type: 3}
-  fireRate: 0.1
+  fireRate: 0.5
 --- !u!1 &5192951661058273762
 GameObject:
   m_ObjectHideFlags: 0

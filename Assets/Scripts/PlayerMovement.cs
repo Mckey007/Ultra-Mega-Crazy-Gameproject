@@ -16,13 +16,16 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private bool isFreezed = false;
 
-    // animation
+    // animation & sound
     Animator animator;
     private string currentState;
 
     const string PLAYER_IDLE = "Player_Idle";
     const string PLAYER_WALK = "Player_Walk";
     const string PLAYER_JUMP = "Player_Jump";
+
+    [SerializeField] private AudioClip jumpSFX;
+    private float jumpSxfTimeLastPlayed = 0f;
 
 
     void Start()
@@ -72,7 +75,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void jump() {
+        PlayJumpSound();
         rb.velocity= new Vector2(rb.velocity.x, jumpHeight);
+    }
+
+    void PlayJumpSound()
+    {
+        // prevents the jump sound from playing too often and interrupting itself
+        if (jumpSxfTimeLastPlayed + jumpSFX.length >= Time.time) return;
+        jumpSxfTimeLastPlayed = Time.time;
+        SoundManager.PlaySoundOnce(jumpSFX);
     }
 
     public void onHit() {

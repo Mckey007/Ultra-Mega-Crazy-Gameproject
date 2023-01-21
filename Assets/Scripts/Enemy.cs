@@ -6,6 +6,9 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int health = 100;
     [SerializeField] private GameObject deathEffect;
+
+    [SerializeField] private AudioClip dieSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         //Instantiate(deathEffect, transform.position, Quaternion.identity);
+        SoundManager.PlaySoundOnce(dieSFX);
         Destroy(gameObject);
     }
 }
