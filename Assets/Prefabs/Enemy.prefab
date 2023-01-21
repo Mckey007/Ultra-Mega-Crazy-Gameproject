@@ -262,4 +262,4 @@ MonoBehaviour:
   health: 100
   deathEffect: {fileID: 4710182824290463386}
   dieSFX: {fileID: 8300000, guid: d57123bc7c7ee4849b0068002a39e5d2, type: 3}
-  dyingDuration: 1
+  dyingDuration: 0.5

@@ -383,7 +383,7 @@ MonoBehaviour:
   health: 100
   deathEffect: {fileID: 1713816927866695264}
   dieSFX: {fileID: 8300000, guid: d57123bc7c7ee4849b0068002a39e5d2, type: 3}
-  dyingDuration: 1
+  dyingDuration: 0.5
 --- !u!1 &6900937551303219374
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,9 +7,6 @@ public static class SoundManager
     private static GameObject oneShotSoundPlayer;
     private static AudioSource oneShotAudioSource;
 
-    private static Dictionary<AudioClip, float> timeOfAudioClip;
-    private static Dictionary<AudioClip, float> delayOfAudioClip;
-
     // Plays the given sound once. Used for one time events like jumps and shots.
     public static void PlaySoundOnce(AudioClip sound)
     {
