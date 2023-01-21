@@ -5,9 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int health = 100;
-    [SerializeField] private GameObject deathEffect;
+    [SerializeField] private EnemyDeathEffect deathEffect;
 
     [SerializeField] private AudioClip dieSFX;
+
+    [SerializeField] private float dyingDuration = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +34,9 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        //Instantiate(deathEffect, transform.position, Quaternion.identity);
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().isKinematic = true;
         SoundManager.PlaySoundOnce(dieSFX);
-        Destroy(gameObject);
+        deathEffect.Play(dyingDuration, gameObject);
     }
 }
