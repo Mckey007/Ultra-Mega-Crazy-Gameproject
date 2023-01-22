@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float boost = 1f;
     private bool isGrounded = false;
     private bool isFreezed = false;
+    public float timescale;
 
     // animation & sound
     Animator animator;
@@ -27,9 +28,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip jumpSFX;
     private float jumpSxfTimeLastPlayed = 0f;
 
+    [SerializeField] GameObject gameOverScreen;
+
 
     void Start()
     {
+        Time.timeScale = 1;
+        if (gameOverScreen != null) gameOverScreen.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -41,11 +46,15 @@ public class PlayerMovement : MonoBehaviour
             if(Input.GetKey(KeyCode.Space)) {
                 reset();
             }
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                loadMainMenu();
+            }
         }
 
         //Reset handle
         if(transform.position.y < -50f) {
-            reset();
+            onHit();
         }
 
         //Movement horizontal
@@ -88,13 +97,20 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void onHit() {
+        if (gameOverScreen != null) gameOverScreen.SetActive(true);
         Time.timeScale = 0;
         this.isFreezed = true;
     }
 
-    void reset() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    private void loadMainMenu()
+    {
         Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+    }
+
+    void reset() {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void ChangeAnimationState(string newState)

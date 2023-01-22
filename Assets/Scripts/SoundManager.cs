@@ -18,8 +18,12 @@ public static class SoundManager
     {
         if (!oneShotAudioSource)
         {
-            oneShotSoundPlayer = new GameObject("SoundPlayer");
-            oneShotAudioSource = oneShotSoundPlayer.AddComponent<AudioSource>();
+            if(GameManager.Instance == null)
+            {
+                Debug.Log("GameManager fehlt");
+                return;
+            }
+            oneShotAudioSource = GameManager.Instance.gameObject.AddComponent<AudioSource>();
         }
         oneShotAudioSource.PlayOneShot(sound, volumeScale);
     }
