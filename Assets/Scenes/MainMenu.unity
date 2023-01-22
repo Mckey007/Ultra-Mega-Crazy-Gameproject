@@ -256,63 +256,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44409608}
   m_CullTransparentMesh: 1
-<<<<<<< HEAD
---- !u!1 &190592305
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 190592307}
-  - component: {fileID: 190592306}
-  m_Layer: 5
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &190592306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190592305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a50bf20daf6d5574388787ee2e6e4075, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mainMenu: {fileID: 2000299146}
-  _howTo: {fileID: 224716251}
-  _options: {fileID: 2076599975}
-  _credits: {fileID: 198383519}
-  _nameOfMainScene: LevelGenerationSandbox
---- !u!224 &190592307
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190592305}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.38125, y: 0.38125, z: 0.38125}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 960.00006, y: 540.32794}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
-=======
->>>>>>> 2890e128c6c65d725662d1fd89b333c0410e8a14
 --- !u!1 &198383519
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +568,7 @@ MonoBehaviour:
   _howTo: {fileID: 224716251}
   _options: {fileID: 2076599975}
   _credits: {fileID: 198383519}
-  _nameOfMainScene: SandboxJan
+  _nameOfMainScene: LevelGenerationSandbox
   _buttonSound: {fileID: 8300000, guid: 734f00bd3e3fd7b46b8c23f7bf7d4a83, type: 3}
 --- !u!1 &650472426
 GameObject:
