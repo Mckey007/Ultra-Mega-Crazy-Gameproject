@@ -24,7 +24,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8241557486133014601}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.38125, y: 0.38125, z: 0.38125}
   m_ConstrainProportionsScale: 0
@@ -49,9 +49,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50bf20daf6d5574388787ee2e6e4075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainMenu: {fileID: 0}
-  _howTo: {fileID: 0}
-  _options: {fileID: 0}
-  _credits: {fileID: 0}
-  _nameOfMainScene: SandboxJan
-  _buttonSound: {fileID: 8300000, guid: 734f00bd3e3fd7b46b8c23f7bf7d4a83, type: 3}
+  bgm: {fileID: 8300000, guid: 1fabc813a9ba08d40a43139a980ce2ce, type: 3}
