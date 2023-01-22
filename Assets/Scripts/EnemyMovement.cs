@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private float speed = 5f;
     [SerializeField]
-    private float direction = -1f;
+    private float direction = 1f;
 
     // Start is called before the first frame update
     void Start()

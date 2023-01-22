@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         move();
 
         //Jump
-        if(Input.GetKey(KeyCode.Space) && jumpsLeft > 0)
+        if(Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0)
         {
             jump();
         }
@@ -83,14 +83,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void move() {
-        // float horizontal = 1;
-        // rb.velocity = new Vector2(speed * boost, rb.velocity.y);
-        transform.position += new Vector3(speed * Time.deltaTime, 0f, 0f);
+        rb.velocity = new Vector2(speed, rb.velocity.y);
     }
 
     void jump() {
         PlayJumpSound();
-        //rb.velocity= new Vector2(rb.velocity.x, jumpHeight);
+        if(jumpsLeft < maxJumps) {
+            rb.velocity = Vector2.zero;
+        }
         rb.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
         jumpsLeft--;
         isGrounded = false;
@@ -135,21 +135,9 @@ public class PlayerMovement : MonoBehaviour
             case "Ground":
                 isGrounded = true;
                 jumpsLeft = maxJumps;
-                //boost = 1f;
                 break;
             case "Enemy":
                 onHit();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D other) {
-        switch(other.gameObject.tag) {
-            case "Ground":
-                //isGrounded = false;
-                //boost = 0.7f;
                 break;
             default:
                 break;

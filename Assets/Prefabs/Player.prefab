@@ -184,8 +184,10 @@ MonoBehaviour:
   rb: {fileID: 1426615808937975310}
   speed: 10
   jumpHeight: 35
-  maxJumps: 1
+  maxJumps: 2
+  timescale: 0
   jumpSFX: {fileID: 8300000, guid: 088bdfaae35df5645b542f6a86d391b2, type: 3}
+  gameOverScreen: {fileID: 0}
 --- !u!212 &1183485424
 SpriteRenderer:
   m_ObjectHideFlags: 0
