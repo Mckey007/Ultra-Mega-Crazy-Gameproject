@@ -16,10 +16,22 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private bool isFreezed = false;
 
+    // animation & sound
+    Animator animator;
+    private string currentState;
+
+    const string PLAYER_IDLE = "Player_Idle";
+    const string PLAYER_WALK = "Player_Walk";
+    const string PLAYER_JUMP = "Player_Jump";
+
+    [SerializeField] private AudioClip jumpSFX;
+    private float jumpSxfTimeLastPlayed = 0f;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -45,6 +57,15 @@ public class PlayerMovement : MonoBehaviour
             jump();
         }
 
+        if(isGrounded)
+        {
+            ChangeAnimationState(PLAYER_WALK);
+        }
+        else
+        {
+            ChangeAnimationState(PLAYER_JUMP);
+        }
+
     }
 
     void move() {
@@ -54,10 +75,19 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void jump() {
+        PlayJumpSound();
         rb.velocity= new Vector2(rb.velocity.x, jumpHeight);
     }
 
-    void onHit() {
+    void PlayJumpSound()
+    {
+        // prevents the jump sound from playing too often and interrupting itself
+        if (jumpSxfTimeLastPlayed + jumpSFX.length >= Time.time) return;
+        jumpSxfTimeLastPlayed = Time.time;
+        SoundManager.PlaySoundOnce(jumpSFX);
+    }
+
+    public void onHit() {
         Time.timeScale = 0;
         this.isFreezed = true;
     }
@@ -65,6 +95,15 @@ public class PlayerMovement : MonoBehaviour
     void reset() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
+    }
+
+    private void ChangeAnimationState(string newState)
+    {
+        // dont allow the same animation to interrupt itself
+        if (currentState == newState) return;
+
+        animator.Play(newState);
+        currentState = newState;
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {   

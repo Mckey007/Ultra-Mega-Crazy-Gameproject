@@ -6,10 +6,15 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject bulletPrefab;
-    [SerializeField] float fireRate = 1f;
+    [SerializeField] float fireRate = 0.5f;
+    [SerializeField] AudioClip shootSFX;
     private bool canFire = true;
     private Vector2 lookDirection;
     private float lookAngle;
+
+    public float LookAngle { get => lookAngle; }
+    public Transform FirePoint { get => firePoint; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +30,7 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") && canFire)
         {
+            SoundManager.PlaySoundOnce(shootSFX, 0.5f);
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             canFire = false;
             StartCoroutine(ShootDelay());
