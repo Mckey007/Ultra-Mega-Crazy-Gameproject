@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private AudioClip bgm;
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+
+        SoundManager.PlayBGM(bgm, 1);
     }
 
 }
