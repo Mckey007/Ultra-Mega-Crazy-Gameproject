@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public static class SoundManager
 {
     private static AudioSource bgmAudioSource;
     private static AudioSource oneShotAudioSource;
+
+    public static AudioSource BgmAudioSource { get => bgmAudioSource; set => bgmAudioSource = value; }
+    public static AudioSource OneShotAudioSource { get => oneShotAudioSource; set => oneShotAudioSource = value; }
 
     // Plays the given sound once. Used for one time events like jumps and shots.
     public static void PlaySoundOnce(AudioClip sound)
@@ -44,4 +49,18 @@ public static class SoundManager
         }
         bgmAudioSource.Play();
     }
+
+
+    public static void UpdateVolumeBGM(float volume)
+    {
+        if (bgmAudioSource == null) return;
+        bgmAudioSource.volume = volume;
+    }
+
+    public static void UpdateVolumeSFX(float volume)
+    {
+        if (oneShotAudioSource == null) return;
+        oneShotAudioSource.volume = volume;
+    }
+
 }

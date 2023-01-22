@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip bgm;
     public static GameManager Instance { get; private set; }
+
+    [SerializeField] public float bgmVolume = 1f;
+    [SerializeField] public float sfxVolume = 1f;
 
     private void Awake()
     {
@@ -19,8 +21,6 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
-
-        SoundManager.PlayBGM(bgm, 1);
     }
 
 }
