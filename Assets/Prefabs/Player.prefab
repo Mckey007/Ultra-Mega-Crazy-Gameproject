@@ -183,7 +183,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1426615808937975310}
   speed: 10
-  jumpHeight: 8
+  jumpHeight: 35
+  maxJumps: 1
   jumpSFX: {fileID: 8300000, guid: 088bdfaae35df5645b542f6a86d391b2, type: 3}
 --- !u!212 &1183485424
 SpriteRenderer:

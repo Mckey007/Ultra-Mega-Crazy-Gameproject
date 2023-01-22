@@ -289,7 +289,7 @@ MonoBehaviour:
   _howTo: {fileID: 224716251}
   _options: {fileID: 2076599975}
   _credits: {fileID: 198383519}
-  _nameOfMainScene: SandboxJan
+  _nameOfMainScene: LevelGenerationSandbox
 --- !u!224 &190592307
 RectTransform:
   m_ObjectHideFlags: 0

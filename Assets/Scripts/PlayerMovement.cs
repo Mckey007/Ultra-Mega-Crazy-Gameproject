@@ -8,13 +8,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb;
     [SerializeField]
-    private float speed = 10f;
+    private float speed = 5f;
     [SerializeField]
-    private float jumpHeight = 10f;
+    private float jumpHeight = 5f;
+    [SerializeField]
+    private int maxJumps = 2;
 
-    private float boost = 1f;
     private bool isGrounded = false;
     private bool isFreezed = false;
+    private int jumpsLeft;
 
     // animation & sound
     Animator animator;
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        jumpsLeft = maxJumps;
     }
 
     void Update()
@@ -52,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         move();
 
         //Jump
-        if(Input.GetKey(KeyCode.Space) && isGrounded)
+        if(Input.GetKey(KeyCode.Space) && jumpsLeft > 0)
         {
             jump();
         }
@@ -69,14 +72,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void move() {
-        //float horizontal = Input.GetAxis("Horizontal");
-        float horizontal = 1;
-        rb.velocity = new Vector2(horizontal * speed * boost, rb.velocity.y);
+        // float horizontal = 1;
+        // rb.velocity = new Vector2(speed * boost, rb.velocity.y);
+        transform.position += new Vector3(speed * Time.deltaTime, 0f, 0f);
     }
 
     void jump() {
         PlayJumpSound();
-        rb.velocity= new Vector2(rb.velocity.x, jumpHeight);
+        //rb.velocity= new Vector2(rb.velocity.x, jumpHeight);
+        rb.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
+        jumpsLeft--;
+        isGrounded = false;
     }
 
     void PlayJumpSound()
@@ -110,7 +116,8 @@ public class PlayerMovement : MonoBehaviour
         switch(collision.gameObject.tag) {
             case "Ground":
                 isGrounded = true;
-                boost = 1f;
+                jumpsLeft = maxJumps;
+                //boost = 1f;
                 break;
             case "Enemy":
                 onHit();
@@ -123,8 +130,8 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionExit2D(Collision2D other) {
         switch(other.gameObject.tag) {
             case "Ground":
-                isGrounded = false;
-                boost = 0.7f;
+                //isGrounded = false;
+                //boost = 0.7f;
                 break;
             default:
                 break;
