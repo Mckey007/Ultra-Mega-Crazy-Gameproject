@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -34,9 +35,15 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] GameObject gameOverScreen;
 
+    private DateTime startTime;
+    private DateTime endTime;
+    [SerializeField] TMP_Text timer;
+    private bool gameOver;
+
 
     void Start()
     {
+        startTime = System.DateTime.Now;
         Time.timeScale = 1;
         if (gameOverScreen != null) gameOverScreen.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
@@ -105,9 +112,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void onHit() {
+
+        if(gameOver == false)
+        {
+            endTime = System.DateTime.Now;
+            TimeSpan playTime = endTime - startTime;
+            timer.text = String.Format("{0}m:{1:D2}s", playTime.Minutes, playTime.Seconds);
+        }
         if (gameOverScreen != null) gameOverScreen.SetActive(true);
         Time.timeScale = 0;
         this.isFreezed = true;
+        gameOver = true;
     }
 
     private void loadMainMenu()
