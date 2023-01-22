@@ -33,6 +33,8 @@ public class LevelGenerator : MonoBehaviour
     }
 
     private Transform SpawnLevelPart(Transform tile, Vector3 spawnPosition) {
-        return Instantiate(tile, spawnPosition, Quaternion.identity);
+        Transform lastTile = Instantiate(tile, spawnPosition, Quaternion.identity);
+        Object.Destroy(lastTile.gameObject, 10.0f);
+        return lastTile;
     }
 }
