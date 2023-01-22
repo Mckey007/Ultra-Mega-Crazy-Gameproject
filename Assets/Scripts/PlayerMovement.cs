@@ -13,13 +13,10 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 5f;
     [SerializeField]
     private float jumpHeight = 5f;
-    [SerializeField]
-    private int maxJumps = 2;
 
     private bool isGrounded = false;
+    private bool canDoubleJump = false;
     private bool isFreezed = false;
-    private int jumpsLeft;
-    public float timescale;
     
 
     // animation & sound
@@ -40,15 +37,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] TMP_Text timer;
     private bool gameOver;
 
+    private BoxCollider2D boxCollider2D;
+    [SerializeField] float groundCheckHeight = 0.5f;
+    [SerializeField] LayerMask groundLayer;
+    private float deathPosition = -50f;
 
     void Start()
     {
+        boxCollider2D = GetComponent<BoxCollider2D>();
         startTime = System.DateTime.Now;
         Time.timeScale = 1;
         if (gameOverScreen != null) gameOverScreen.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        jumpsLeft = maxJumps;
     }
 
     void Update()
@@ -65,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Reset handle
-        if(transform.position.y < -50f) {
+        if(transform.position.y < deathPosition) {
             onHit();
         }
 
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         move();
 
         //Jump
-        if(Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0)
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             jump();
         }
@@ -86,7 +87,27 @@ public class PlayerMovement : MonoBehaviour
         {
             ChangeAnimationState(PLAYER_JUMP);
         }
+        CheckGrounded();
 
+    }
+
+    private void CheckGrounded()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.down, groundCheckHeight, groundLayer);
+        Color rayColor;
+        if (raycastHit.collider != null)
+        {
+            isGrounded = true;
+            canDoubleJump = true;
+            rayColor = Color.green;
+        }
+        else
+        {
+            rayColor = Color.red;
+            isGrounded = false;
+        }
+        //Debug.DrawR(boxCollider2D.bounds.center, Vector2.down * (boxCollider2D.bounds.extents.y + groundCheckHeight), rayColor);
+        
     }
 
     void move() {
@@ -94,13 +115,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void jump() {
+        if (!isGrounded && !canDoubleJump) return;
+        if (!isGrounded && canDoubleJump) canDoubleJump = false;
         PlayJumpSound();
-        if(jumpsLeft < maxJumps) {
-            rb.velocity = Vector2.zero;
-        }
+        rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
-        jumpsLeft--;
-        isGrounded = false;
     }
 
     void PlayJumpSound()
@@ -147,15 +166,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {   
         switch(collision.gameObject.tag) {
-            case "Ground":
-                isGrounded = true;
-                jumpsLeft = maxJumps;
-                break;
             case "Enemy":
                 onHit();
                 break;
             default:
                 break;
         }
+    }
+
+    public void UpdateDeathPosition(float y)
+    {
+        deathPosition = y - 50f;
     }
 }

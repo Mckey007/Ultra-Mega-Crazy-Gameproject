@@ -13,9 +13,11 @@ public class LevelGenerator : MonoBehaviour
     private List<Transform> tileList;
 
     private Vector3 lastEndPosition;
+    private PlayerMovement playerMovement;
 
     private void Awake() {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerMovement = player.GetComponent<PlayerMovement>();
         lastEndPosition = levelStart.Find("EndPoint").position;
         for(int i=0; i<START_INSTANCE_NUMBER; i++) {
             SpawnLevelPart();
@@ -30,6 +32,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void SpawnLevelPart() {
         lastEndPosition = SpawnLevelPart(tileList[Random.Range(0, tileList.Count)] ,lastEndPosition).Find("EndPoint").position;
+        playerMovement.UpdateDeathPosition(lastEndPosition.y);
     }
 
     private Transform SpawnLevelPart(Transform tile, Vector3 spawnPosition) {

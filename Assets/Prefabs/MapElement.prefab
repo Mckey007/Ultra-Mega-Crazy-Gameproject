@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3376467656424745531}
   - component: {fileID: 1359835074021697150}
   - component: {fileID: 9114160420486690395}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MapElement
   m_TagString: Ground
   m_Icon: {fileID: 0}

@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4399994895115133914}
-  detectionRange: 20
+  detectionRange: 25
   lineRenderer: {fileID: 4399994895115133912}
 --- !u!1 &4399994897048302008
 GameObject:

@@ -184,10 +184,13 @@ MonoBehaviour:
   rb: {fileID: 1426615808937975310}
   speed: 10
   jumpHeight: 35
-  maxJumps: 2
-  timescale: 0
   jumpSFX: {fileID: 8300000, guid: 088bdfaae35df5645b542f6a86d391b2, type: 3}
   gameOverScreen: {fileID: 0}
+  timer: {fileID: 0}
+  groundCheckHeight: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!212 &1183485424
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -371,7 +374,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1426615810243913385}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.15, y: 2.4, z: -10}
+  m_LocalPosition: {x: 11.29, y: 1.03, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

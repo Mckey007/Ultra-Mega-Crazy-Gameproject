@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  detectionRange: 10
+  detectionRange: 20
 --- !u!50 &3983381749367165993
 Rigidbody2D:
   serializedVersion: 4
